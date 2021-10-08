@@ -2464,7 +2464,7 @@ GameObject:
   - component: {fileID: 92174325}
   - component: {fileID: 92174324}
   - component: {fileID: 92174326}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4172,6 +4172,14 @@ PrefabInstance:
       propertyPath: speed
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1996625730637847891, guid: 6c58306229c62254cb076b1cd0e0c541, type: 3}
+      propertyPath: whatIsGround.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 1996625730637847893, guid: 6c58306229c62254cb076b1cd0e0c541, type: 3}
+      propertyPath: m_GravityScale
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c58306229c62254cb076b1cd0e0c541, type: 3}
 --- !u!1001 &1385245845
@@ -4248,7 +4256,7 @@ GameObject:
   - component: {fileID: 1476478054}
   - component: {fileID: 1476478053}
   - component: {fileID: 1476478055}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Down (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
