@@ -26,7 +26,7 @@ public class SickIndicator : MonoBehaviour
 
         if (currentValue == 1)
         {
-            //ізоляція гравця
+            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             print("izolation");
         }
     }

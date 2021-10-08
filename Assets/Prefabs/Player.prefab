@@ -254,6 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  sickIndicator: {fileID: 0}
 --- !u!1 &1996625731711200774
 GameObject:
   m_ObjectHideFlags: 0
