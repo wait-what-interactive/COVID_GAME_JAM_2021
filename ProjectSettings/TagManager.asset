@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Stairs
   - LevelBorder
+  - Bullet
   layers:
   - Default
   - TransparentFX
