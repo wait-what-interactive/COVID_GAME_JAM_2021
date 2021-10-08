@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public float speed = 5;
+    public float speed = 5f;
+    public float jumpForce = 15f;
     public SickIndicator sickIndicator;
+    public LayerMask whatIsGround;
+
     private Rigidbody2D _rigidBody;
     private Collider2D _collider;
     private SpriteRenderer _spriteRenderer;
@@ -23,6 +26,11 @@ public class Character : MonoBehaviour
     {
         if (_stairsMovement)
             MoveToAnotherFloor();
+
+        if(Input.GetKey(KeyCode.Space) && IsGrounded())
+        {
+            Jump();
+        }
     }
 
     private void FixedUpdate()
@@ -71,10 +79,19 @@ public class Character : MonoBehaviour
                 _stairsMovement = true;
                 _rigidBody.bodyType = RigidbodyType2D.Kinematic;
                 _collider.isTrigger = true;
-
             }
         }
-        
+    }
+
+    private void Jump()
+    {
+        _rigidBody.velocity = Vector2.zero;
+        _rigidBody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics2D.OverlapCircleAll(transform.position, 0.02f, whatIsGround).Length > 0;
     }
 
     public void UpdateSick(float value)
