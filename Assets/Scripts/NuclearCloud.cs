@@ -6,7 +6,8 @@ public class NuclearCloud : MonoBehaviour
 {
     public float radius = 1;
     public float damage = 0.1f;
-    public float speed = 1f;
+    public float speed = 10f;
+    public Vector2 dir;
 
     private void Start()
     {
@@ -15,7 +16,9 @@ public class NuclearCloud : MonoBehaviour
 
     void Update()
     {
-        radius -= Time.deltaTime;
+        transform.Translate(dir * speed * Time.deltaTime);
+
+        radius -= Time.deltaTime*speed;
         transform.localScale = Vector3.one * radius;
 
         if (radius <= 0.1)
@@ -26,5 +29,10 @@ public class NuclearCloud : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
             collision.GetComponent<Character>().UpdateSick(damage);
+    }
+
+    public void SetDirection(Vector2 dir)
+    {
+        this.dir = dir;
     }
 }
