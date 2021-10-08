@@ -40,7 +40,6 @@ public class PlayerGun : MonoBehaviour
     private void Shoot()
     {
         Vector3 rot = transform.rotation.eulerAngles;
-        //rot.z += 90;
         Instantiate(bullet, _bulletSpawnPoint.position, Quaternion.Euler(rot));
     }
 
