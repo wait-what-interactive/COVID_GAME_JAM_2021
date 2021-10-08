@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public float speed = 5;
+    public SickIndicator sickIndicator;
     private Rigidbody2D _rigidBody;
     private Collider2D _collider;
     private SpriteRenderer _spriteRenderer;
@@ -71,5 +72,10 @@ public class Character : MonoBehaviour
             }
         }
         
+    }
+
+    public void UpdateSick(float value)
+    {
+        sickIndicator.SetValue(sickIndicator.GetValue() + value);
     }
 }
