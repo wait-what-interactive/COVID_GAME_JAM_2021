@@ -24,7 +24,7 @@ public class SickIndicator : MonoBehaviour
         leftIndicator.fillAmount = currentValue;
         rightIndicator.fillAmount = currentValue;
 
-        if (currentValue <= 0)
+        if (currentValue == 1)
         {
             //≥зол€ц≥€ гравц€
             print("izolation");
