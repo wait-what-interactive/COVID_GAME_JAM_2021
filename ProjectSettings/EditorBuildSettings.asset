@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Preloader.unity
     guid: 79c58496b8c18044891cffdb5a56dbfb
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 5a6612f2869d9aa4f83917255d2b6ba1
+  - enabled: 1
+    path: Assets/Scenes/Metro_carriage_type_one.unity
+    guid: ac7212ed81713fb44b3f6fa016f8688b
   m_configObjects: {}
