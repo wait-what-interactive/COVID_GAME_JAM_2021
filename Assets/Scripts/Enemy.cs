@@ -31,7 +31,10 @@ public class Enemy : MonoBehaviour
         {
             HP -= collision.GetComponent<Bullet>().GetDamage();
             if (HP <= 0)
+            {
                 haveMask = true;
+                transform.GetChild(0).gameObject.SetActive(false);
+            }
 
             return;
         }

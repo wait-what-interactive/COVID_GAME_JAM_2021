@@ -9,24 +9,24 @@ public class SickIndicator : MonoBehaviour
 
     public float speed;
 
-    Image leftIndicator;
-    Image rightIndicator;
+    Slider leftIndicator;
+    Slider rightIndicator;
     private void Start()
     {
-        leftIndicator = transform.GetChild(0).GetComponent<Image>();
-        rightIndicator = transform.GetChild(1).GetComponent<Image>();
+        leftIndicator = transform.GetChild(0).GetComponent<Slider>();
+        rightIndicator = transform.GetChild(1).GetComponent<Slider>();
     }
 
     void Update()
     {
         currentValue = currentValue > 0 ? currentValue - Time.deltaTime*speed : 0;
 
-        leftIndicator.fillAmount = currentValue;
-        rightIndicator.fillAmount = currentValue;
+        leftIndicator.value = currentValue;
+        rightIndicator.value = currentValue;
 
         if (currentValue == 1)
         {
-            //ізоляція гравця
+            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             print("izolation");
         }
     }
