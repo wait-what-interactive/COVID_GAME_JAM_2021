@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Bullet : MonoBehaviour
+{
+    public int damage = 1;
+    public float speed = 5f;
+
+    void Update()
+    {
+        transform.Translate(transform.right * speed * Time.deltaTime);
+    }
+
+    public int GetDamage()
+    {
+        return damage;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
+    }
+}
