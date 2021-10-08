@@ -21,11 +21,14 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        if(!_stairsMovement)
-            Move();
-
         if (_stairsMovement)
             MoveToAnotherFloor();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!_stairsMovement)
+            Move();
     }
 
     private void MoveToAnotherFloor()
