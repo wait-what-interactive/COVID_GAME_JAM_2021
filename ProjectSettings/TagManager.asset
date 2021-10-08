@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Stairs
+  - LevelBorder
   layers:
   - Default
   - TransparentFX
