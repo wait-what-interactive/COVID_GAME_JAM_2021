@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SickIndicator : MonoBehaviour
 {
-    float currentValue = 1;
+    float currentValue = 0;
 
     public float speed;
 

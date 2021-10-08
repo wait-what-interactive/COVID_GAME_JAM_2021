@@ -11,6 +11,13 @@ public class Enemy : MonoBehaviour
 
     public float HP = 1;
     public bool haveMask = false;
+    public float minTimeToSpawnCloud = 4;
+    public float maxTimeToSpawnCloud = 15;
+    public GameObject nuclearCloud;
+    bool canMove = true;
+
+    Coroutine spawnCoroutine;
+    Coroutine stopingCoroutine;
 
     private void Start()
     {
@@ -18,10 +25,17 @@ public class Enemy : MonoBehaviour
 
         if(Random.Range(0,2) == 0)
             dir = Vector2.left;
+
+        float time = Random.Range(minTimeToSpawnCloud, maxTimeToSpawnCloud);
+        spawnCoroutine = StartCoroutine(SpawnCloud(time));
+        stopingCoroutine = StartCoroutine(StopEnemy(time - 2));
     }
 
     void Update()
     {
+        if (!canMove)
+            return;
+
         transform.Translate(dir * speed * Time.deltaTime);
     }
 
@@ -34,6 +48,7 @@ public class Enemy : MonoBehaviour
             {
                 haveMask = true;
                 transform.GetChild(0).gameObject.SetActive(false);
+                StopCoroutine(spawnCoroutine);
             }
 
             return;
@@ -56,5 +71,30 @@ public class Enemy : MonoBehaviour
             dir = Vector2.right;
             return;
         }
+    }
+
+    IEnumerator SpawnCloud(float time)
+    {
+        yield return new WaitForSeconds(time);
+        //spawn cloud
+        var cloud = Instantiate(nuclearCloud, transform.position, Quaternion.identity);
+        cloud.GetComponent<NuclearCloud>().SetDirection(dir);
+
+        float time_ = Random.Range(minTimeToSpawnCloud, maxTimeToSpawnCloud);
+        spawnCoroutine = StartCoroutine(SpawnCloud(time_));
+        stopingCoroutine = StartCoroutine(StopEnemy(time - 2));
+    }
+
+    IEnumerator StopEnemy(float time)
+    {
+        yield return new WaitForSeconds(time);
+        canMove = false;
+        StartCoroutine(ResetMovementEnemy(2));
+    }
+
+    IEnumerator ResetMovementEnemy(float time)
+    {
+        yield return new WaitForSeconds(time);
+        canMove = true;
     }
 }
