@@ -5,12 +5,13 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public float speed = 5;
-    public float jumpForce = 5;
     private Rigidbody2D _rigidBody;
+    private SpriteRenderer _spriteRenderer;
 
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
@@ -20,12 +21,12 @@ public class Character : MonoBehaviour
 
     private void Move()
     {
-        transform.position += new Vector3(speed, 0) * Input.GetAxis("Horizontal");
+        transform.Translate(transform.right * Input.GetAxis("Horizontal") * speed * Time.deltaTime);
 
         if (Input.GetAxis("Horizontal") > 0)
-            GetComponent<SpriteRenderer>().flipX = false;
+            _spriteRenderer.flipX = false;
 
         else if (Input.GetAxis("Horizontal") < 0)
-            GetComponent<SpriteRenderer>().flipX = true;
+            _spriteRenderer.flipX = true;
     }
 }
