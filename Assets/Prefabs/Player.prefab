@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170228485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1692117305}
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 5931625453233561866, guid: e787dfb8a9bfdd441812e8798f03af17, type: 3}
+  shootRate: 0.5
 --- !u!1 &1692117304
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,14 +70,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692117304}
-  m_LocalRotation: {x: -0, y: -0, z: -0.26151532, w: 0.96519935}
-  m_LocalPosition: {x: 0.25, y: 0.44, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 0.3, y: 0.6, z: 1}
   m_Children:
   - {fileID: 1800351067}
   m_Father: {fileID: 170228486}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30.32}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1692117306
 SpriteRenderer:
   m_ObjectHideFlags: 0

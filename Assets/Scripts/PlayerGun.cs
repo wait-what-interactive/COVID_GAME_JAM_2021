@@ -39,18 +39,17 @@ public class PlayerGun : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(bullet, _bulletSpawnPoint.position, Quaternion.identity);
+        Vector3 rot = transform.rotation.eulerAngles;
+        //rot.z += 90;
+        Instantiate(bullet, _bulletSpawnPoint.position, Quaternion.Euler(rot));
     }
 
     private void RotateGunToMouse()
     {
-        Vector3 mousePos = Input.mousePosition;
+        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        difference.Normalize();
 
-        Vector3 objectPos = Camera.main.WorldToScreenPoint(transform.position);
-        mousePos.x -= objectPos.x;
-        mousePos.y -= objectPos.y;
-
-        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 60));
+        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, rotZ + 270);
     }
 }
