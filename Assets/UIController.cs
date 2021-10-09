@@ -11,8 +11,28 @@ public class UIController : MonoBehaviour
         SceneManager.LoadScene("Level1");
     }
 
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
     public void Exit()
     {
         Application.Quit();
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene("Level"+ GoToNextLevel.currentLevel.ToString());
     }
 }
