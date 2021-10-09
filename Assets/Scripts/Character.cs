@@ -8,6 +8,7 @@ public class Character : MonoBehaviour
     public float jumpForce = 15f;
     public SickIndicator sickIndicator;
     public LayerMask whatIsGround;
+    [HideInInspector] public bool isolated = false;
 
     private Rigidbody2D _rigidBody;
     private Collider2D _collider;
@@ -28,7 +29,7 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        if (!canMove)
+        if (!canMove || isolated)
             return;
 
         if (_stairsMovement)
@@ -53,8 +54,21 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+            if (Input.GetKey(KeyCode.K))
+            {
+                Debug.Log("ff");
+                EnemyController.spawnedEnemies.Clear();
+            }
+
         if (!canMove)
             return;
+
+        if (Input.GetKey(KeyCode.K))
+            {
+                Debug.Log("ff");
+                EnemyController.spawnedEnemies.Clear();
+            }
 
         if (!_stairsMovement)
             Move();
@@ -137,6 +151,7 @@ public class Character : MonoBehaviour
     public void PlayIsolationAnimation()
     {
         _animator.SetTrigger("Isolate");
+        isolated = true;
     }
 
     public void EndShoot()
