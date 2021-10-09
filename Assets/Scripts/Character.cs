@@ -84,10 +84,10 @@ public class Character : MonoBehaviour
         transform.Translate(transform.right * Input.GetAxis("Horizontal") * speed * Time.deltaTime);
 
         if (Input.GetAxis("Horizontal") > 0)
-            _spriteRenderer.flipX = false;
+            Flip(false);
 
         else if (Input.GetAxis("Horizontal") < 0)
-            _spriteRenderer.flipX = true;
+            Flip(true);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -154,5 +154,10 @@ public class Character : MonoBehaviour
     public void ResetMoving()
     {
         canMove = true;
+    }
+
+    public void Flip(bool flip)
+    {
+        _spriteRenderer.flipX = flip;
     }
 }
