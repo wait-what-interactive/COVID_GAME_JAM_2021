@@ -16,11 +16,17 @@ public class Enemy : MonoBehaviour
     public GameObject nuclearCloud;
     bool canMove = true;
 
+    private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
+
     Coroutine spawnCoroutine;
     Coroutine stopingCoroutine;
 
     private void Start()
     {
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
         dir = Vector2.right;
 
         if(Random.Range(0,2) == 0)
@@ -34,9 +40,26 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (!canMove)
+        {
+            _animator.SetBool("Run", false);
+            return;
+        }
+        Move();
+    }
+
+    private void Move()
+    {
+        if (HP <= 0)
             return;
 
+        if (dir == Vector2.right)
+            _spriteRenderer.flipX = false;
+
+        if (dir == Vector2.left)
+            _spriteRenderer.flipX = true;
+
         transform.Translate(dir * speed * Time.deltaTime);
+        _animator.SetBool("Run", true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,6 +69,7 @@ public class Enemy : MonoBehaviour
             HP -= collision.GetComponent<Bullet>().GetDamage();
             if (HP <= 0)
             {
+                _animator.SetBool("Isolated", true);
                 haveMask = true;
                 EnemyController.RemoveEnemy(gameObject);
                 transform.GetChild(0).gameObject.SetActive(false);
@@ -80,6 +104,7 @@ public class Enemy : MonoBehaviour
         //spawn cloud
         var cloud = Instantiate(nuclearCloud, transform.position, Quaternion.identity);
         cloud.GetComponent<NuclearCloud>().SetDirection(dir);
+        _animator.SetBool("Attack", true);
 
         float time_ = Random.Range(minTimeToSpawnCloud, maxTimeToSpawnCloud);
         spawnCoroutine = StartCoroutine(SpawnCloud(time_));
@@ -97,5 +122,10 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         canMove = true;
+    }
+
+    public void StopAttack()
+    {
+        _animator.SetBool("Attack", false);
     }
 }
