@@ -18,7 +18,7 @@ public class NuclearCloud : MonoBehaviour
     {
         transform.Translate(dir * speed * Time.deltaTime);
 
-        radius -= Time.deltaTime*speed;
+        radius -= Time.deltaTime * speed;
         transform.localScale = Vector3.one * radius;
 
         if (radius <= 0.1)

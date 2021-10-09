@@ -86,7 +86,10 @@ public class Enemy : MonoBehaviour
             dir = dir == Vector2.left ? Vector2.right : Vector2.left;
             return;
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject == gameObject.transform.parent.GetChild(1).gameObject)
         {
             dir = Vector2.left;
@@ -99,6 +102,7 @@ public class Enemy : MonoBehaviour
             return;
         }
     }
+
 
     IEnumerator SpawnCloud(float time)
     {
