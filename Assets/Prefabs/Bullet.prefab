@@ -117,6 +117,7 @@ MonoBehaviour:
   damage: 1
   speed: 5
   destroyPS: {fileID: 1338140374003282668, guid: 2d7734e110262b247813f4c880e66d3e, type: 3}
+  hitEnemyPS: {fileID: 8929906349731433731, guid: 1e2285b08393ffe4bb96d7efbb1abe4f, type: 3}
 --- !u!50 &5983758221221172703
 Rigidbody2D:
   serializedVersion: 4
