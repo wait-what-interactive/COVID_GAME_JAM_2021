@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
     private bool _stairsMovement = false;
     private bool _jumping = false;
     Transform pointToAnotherFloor; 
+    bool canMove = true;
 
     void Start()
     {
@@ -27,6 +28,9 @@ public class Character : MonoBehaviour
 
     void Update()
     {
+        if (!canMove)
+            return;
+
         if (_stairsMovement)
             MoveToAnotherFloor();
 
@@ -46,6 +50,9 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!canMove)
+            return;
+
         if (!_stairsMovement)
             Move();
     }
@@ -136,5 +143,16 @@ public class Character : MonoBehaviour
     public void EndJump()
     {
         _animator.SetBool("Jump", false);
+    }
+    
+    public void StopMoving()
+    {
+        print("here");
+        canMove = false;
+    }
+
+    public void ResetMoving()
+    {
+        canMove = true;
     }
 }

@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class SickIndicator : MonoBehaviour
 {
-    float currentValue = 0;
+    float currentValue = 0.5f;
 
     public float speed;
 
     Slider leftIndicator;
     Slider rightIndicator;
+
+    public Character player;
+
     private void Start()
     {
         leftIndicator = transform.GetChild(0).GetComponent<Slider>();
@@ -23,17 +26,27 @@ public class SickIndicator : MonoBehaviour
 
         leftIndicator.value = currentValue;
         rightIndicator.value = currentValue;
+    }
 
-        if (currentValue == 1)
+    IEnumerator IzolatePlayer()
+    {
+        while (currentValue >= 0.01) 
         {
-            //�������� ������
-            print("izolation");
+            yield return new WaitForSeconds(Time.deltaTime);
         }
+        player.ResetMoving();
     }
 
     public void SetValue(float value)
     {
         currentValue = value;
+
+        if (currentValue >= 0.98)
+        {
+            player.StopMoving();
+            StartCoroutine(IzolatePlayer());
+            print("izolation");
+        }
     }
 
     public float GetValue()
