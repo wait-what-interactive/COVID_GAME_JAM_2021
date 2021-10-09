@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level10.unity
     guid: 59d30a20f821b064494a229e26f00eda
+  - enabled: 1
+    path: Assets/Scenes/Isolator.unity
+    guid: e2e2bcbfd104ec44098a4e6d9bf4874b
   m_configObjects: {}
