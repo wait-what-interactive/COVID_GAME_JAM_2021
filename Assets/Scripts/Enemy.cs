@@ -102,13 +102,18 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         //spawn cloud
-        var cloud = Instantiate(nuclearCloud, transform.position, Quaternion.identity);
-        cloud.GetComponent<NuclearCloud>().SetDirection(dir);
+
         _animator.SetBool("Attack", true);
 
         float time_ = Random.Range(minTimeToSpawnCloud, maxTimeToSpawnCloud);
         spawnCoroutine = StartCoroutine(SpawnCloud(time_));
         stopingCoroutine = StartCoroutine(StopEnemy(time - 2));
+    }
+
+    public void SpawnCloudFunction()
+    {
+        var cloud = Instantiate(nuclearCloud, transform.position, Quaternion.identity);
+        cloud.GetComponent<NuclearCloud>().SetDirection(dir);
     }
 
     IEnumerator StopEnemy(float time)
