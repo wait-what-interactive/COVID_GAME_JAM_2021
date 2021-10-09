@@ -28,16 +28,16 @@ public class EnemyController : MonoBehaviour
         {
             Vector3 enemyPos=Vector3.zero;
 
-            if(Random.Range(0,2) == 0)
+            if(Random.Range(0,2) == 1)
                 enemyPos = new Vector2(Random.Range(leftWall.transform.position.x + 1, rightWall.transform.position.x - 1 ), secondLevelSpawn);
             else
             {
                 float xPos;
 
-                do
-                {
+                //do
+                //{
                     xPos = Random.Range(leftWall.transform.position.x + 1, rightWall.transform.position.x - 1);
-                } while (!(player.transform.position.x < xPos + 3 && (player.transform.position.x > xPos - 3)));
+                //} while (!(player.transform.position.x < xPos + 3 && (player.transform.position.x > xPos - 3)));
 
                 enemyPos = new Vector2(xPos, firstLevelSpawn);
             }
