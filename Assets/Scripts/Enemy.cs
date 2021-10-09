@@ -22,9 +22,12 @@ public class Enemy : MonoBehaviour
     Coroutine spawnCoroutine;
     Coroutine stopingCoroutine;
     float _time_;
+    public float minSpeed;
+    public float maxSpeed;
 
     private void Start()
     {
+        speed = Random.Range(minSpeed, maxSpeed);
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -67,18 +70,21 @@ public class Enemy : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Bullet"))
         {
-            HP -= collision.gameObject.GetComponent<Bullet>().GetDamage();
-            if (HP <= 0)
+            if(Random.Range(0,4) == 1)
             {
-                _animator.SetBool("Isolated", true);
-                haveMask = true;
-                EnemyController.RemoveEnemy(gameObject);
-                transform.GetChild(0).gameObject.SetActive(false);
-                StopCoroutine(spawnCoroutine);
-                GetComponent<Collider2D>().isTrigger = true;
-            }
+                HP -= collision.gameObject.GetComponent<Bullet>().GetDamage();
+                if (HP <= 0)
+                {
+                    _animator.SetBool("Isolated", true);
+                    haveMask = true;
+                    EnemyController.RemoveEnemy(gameObject);
+                    transform.GetChild(0).gameObject.SetActive(false);
+                    StopCoroutine(spawnCoroutine);
+                    GetComponent<Collider2D>().isTrigger = true;
+                }
 
-            return;
+                return;
+            }
         }
 
         if(collision.gameObject.CompareTag("LevelBorder"))
@@ -86,7 +92,10 @@ public class Enemy : MonoBehaviour
             dir = dir == Vector2.left ? Vector2.right : Vector2.left;
             return;
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject == gameObject.transform.parent.GetChild(1).gameObject)
         {
             dir = Vector2.left;
@@ -99,6 +108,7 @@ public class Enemy : MonoBehaviour
             return;
         }
     }
+
 
     IEnumerator SpawnCloud(float time)
     {

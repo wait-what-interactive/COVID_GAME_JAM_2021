@@ -15,6 +15,11 @@ public class EnemyController : MonoBehaviour
 
     public static List<GameObject> spawnedEnemies;
 
+    public static int EnemyCount()
+    {
+        return spawnedEnemies.Count;
+    }
+
     void Start()
     {
         spawnedEnemies = new List<GameObject>();
@@ -44,10 +49,11 @@ public class EnemyController : MonoBehaviour
 
     public static void RemoveEnemy(GameObject enemy)
     {
-        spawnedEnemies.Remove(enemy);
+        spawnedEnemies.RemoveAt(0);
 
         if(spawnedEnemies.Count==0)
         {
+            print("got to next level");
             //go to next level
         }
     }
