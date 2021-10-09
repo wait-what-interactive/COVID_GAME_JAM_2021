@@ -10,23 +10,23 @@ public class SickIndicator : MonoBehaviour
 
     public float speed;
 
-    Slider leftIndicator;
-    Slider rightIndicator;
+    Image leftIndicator;
+    Image rightIndicator;
 
     public Character player;
 
     private void Start()
     {
-        leftIndicator = transform.GetChild(0).GetComponent<Slider>();
-        rightIndicator = transform.GetChild(1).GetComponent<Slider>();
+        leftIndicator = transform.GetChild(0).transform.GetChild(0).GetComponent<Image>();
+        rightIndicator = transform.GetChild(1).transform.GetChild(0).GetComponent<Image>();
     }
 
     void Update()
     {
         currentValue = currentValue > 0 ? currentValue - Time.deltaTime*speed/3 : 0;
 
-        leftIndicator.value = currentValue;
-        rightIndicator.value = currentValue;
+        leftIndicator.fillAmount = currentValue;
+        rightIndicator.fillAmount = currentValue;
     }
 
     IEnumerator IzolatePlayer()
