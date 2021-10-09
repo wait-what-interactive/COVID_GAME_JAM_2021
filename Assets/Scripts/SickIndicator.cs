@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SickIndicator : MonoBehaviour
 {
@@ -44,9 +45,12 @@ public class SickIndicator : MonoBehaviour
         if (currentValue >= 0.98)
         {
             player.StopMoving();
-            StartCoroutine(IzolatePlayer());
+            //StartCoroutine(IzolatePlayer());
             print("izolation");
-            player.PlayIsolationAnimation();
+
+            SceneManager.LoadScene("Isolator");
+
+            //player.PlayIsolationAnimation();
         }
     }
 
