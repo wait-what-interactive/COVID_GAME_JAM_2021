@@ -15,9 +15,4 @@ public class CharacterAnimations : MonoBehaviour
     {
         _character.EndShoot();
     }
-
-    //public void EndJumpAnimation()
-    //{
-    //    _character.EndJump();
-    //}
 }

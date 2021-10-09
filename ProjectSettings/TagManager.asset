@@ -7,17 +7,19 @@ TagManager:
   - Stairs
   - LevelBorder
   - Bullet
+  - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 
   - Ground
-  - 
-  - 
+  - Bullet
+  - Enemy
   - 
   - 
   - 

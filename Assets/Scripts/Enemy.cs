@@ -16,11 +16,18 @@ public class Enemy : MonoBehaviour
     public GameObject nuclearCloud;
     bool canMove = true;
 
+    private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
+
     Coroutine spawnCoroutine;
     Coroutine stopingCoroutine;
+    float _time_;
 
     private void Start()
     {
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
         dir = Vector2.right;
 
         if(Random.Range(0,2) == 0)
@@ -34,27 +41,47 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (!canMove)
+        {
+            _animator.SetBool("Run", false);
             return;
-
-        transform.Translate(dir * speed * Time.deltaTime);
+        }
+        Move();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Move()
     {
-        if(collision.CompareTag("Bullet"))
+        if (HP <= 0)
+            return;
+
+        if (dir == Vector2.right)
+            _spriteRenderer.flipX = false;
+
+        if (dir == Vector2.left)
+            _spriteRenderer.flipX = true;
+
+        transform.Translate(dir * speed * Time.deltaTime);
+        _animator.SetBool("Run", true);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Bullet"))
         {
-            HP -= collision.GetComponent<Bullet>().GetDamage();
+            HP -= collision.gameObject.GetComponent<Bullet>().GetDamage();
             if (HP <= 0)
             {
+                _animator.SetBool("Isolated", true);
                 haveMask = true;
+                EnemyController.RemoveEnemy(gameObject);
                 transform.GetChild(0).gameObject.SetActive(false);
                 StopCoroutine(spawnCoroutine);
+                GetComponent<Collider2D>().isTrigger = true;
             }
 
             return;
         }
 
-        if(collision.CompareTag("LevelBorder"))
+        if(collision.gameObject.CompareTag("LevelBorder"))
         {
             dir = dir == Vector2.left ? Vector2.right : Vector2.left;
             return;
@@ -77,12 +104,20 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         //spawn cloud
+
+        _animator.SetBool("Attack", true);
+        _animator.SetBool("Run", false);
+        _time_ = time;
+    }
+
+    public void SpawnCloudFunction()
+    {
         var cloud = Instantiate(nuclearCloud, transform.position, Quaternion.identity);
         cloud.GetComponent<NuclearCloud>().SetDirection(dir);
 
         float time_ = Random.Range(minTimeToSpawnCloud, maxTimeToSpawnCloud);
         spawnCoroutine = StartCoroutine(SpawnCloud(time_));
-        stopingCoroutine = StartCoroutine(StopEnemy(time - 2));
+        stopingCoroutine = StartCoroutine(StopEnemy(_time_ - 2));
     }
 
     IEnumerator StopEnemy(float time)
@@ -96,5 +131,10 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         canMove = true;
+    }
+
+    public void StopAttack()
+    {
+        _animator.SetBool("Attack", false);
     }
 }
