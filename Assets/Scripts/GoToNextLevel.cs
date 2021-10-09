@@ -9,10 +9,14 @@ public class GoToNextLevel : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        print(EnemyController.spawnedEnemies.Count);
         if (EnemyController.spawnedEnemies.Count == 0)
         {
             currentLevel += 1;
-            SceneManager.LoadScene("level" + currentLevel.ToString());
+            if(currentLevel<11)
+                SceneManager.LoadScene("Level" + currentLevel.ToString());
+            else
+                SceneManager.LoadScene("Menu");
         }
     }
 }

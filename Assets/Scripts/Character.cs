@@ -53,6 +53,13 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+            if (Input.GetKey(KeyCode.K))
+            {
+                Debug.Log("ff");
+                EnemyController.spawnedEnemies.Clear();
+            }
+
         if (!canMove)
             return;
 
