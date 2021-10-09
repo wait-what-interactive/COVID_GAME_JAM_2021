@@ -3088,7 +3088,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Time to end of izolation:'
+  m_Text: 'Time to end of isolation:'
 --- !u!222 &1693874449
 CanvasRenderer:
   m_ObjectHideFlags: 0
