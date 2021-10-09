@@ -6,6 +6,7 @@ public class PlayerGun : MonoBehaviour
 {
     public GameObject bullet;
     public float shootRate = .5f;
+    public ParticleSystem shootParticles;
 
     private Transform _bulletSpawnPoint;
 
@@ -39,6 +40,9 @@ public class PlayerGun : MonoBehaviour
 
     private void Shoot()
     {
+        if (shootParticles)
+            shootParticles.Play();
+
         _character.PlayShootAnimation();
         Vector3 rot = transform.rotation.eulerAngles;
         GameObject _bullet = Instantiate(bullet, _bulletSpawnPoint.position, Quaternion.Euler(rot));
