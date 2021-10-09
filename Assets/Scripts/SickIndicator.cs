@@ -5,35 +5,48 @@ using UnityEngine.UI;
 
 public class SickIndicator : MonoBehaviour
 {
-    float currentValue = 1;
+    float currentValue = 0.5f;
 
     public float speed;
 
-    Image leftIndicator;
-    Image rightIndicator;
+    Slider leftIndicator;
+    Slider rightIndicator;
+
+    public Character player;
+
     private void Start()
     {
-        leftIndicator = transform.GetChild(0).GetComponent<Image>();
-        rightIndicator = transform.GetChild(1).GetComponent<Image>();
+        leftIndicator = transform.GetChild(0).GetComponent<Slider>();
+        rightIndicator = transform.GetChild(1).GetComponent<Slider>();
     }
 
     void Update()
     {
         currentValue = currentValue > 0 ? currentValue - Time.deltaTime*speed : 0;
 
-        leftIndicator.fillAmount = currentValue;
-        rightIndicator.fillAmount = currentValue;
+        leftIndicator.value = currentValue;
+        rightIndicator.value = currentValue;
+    }
 
-        if (currentValue == 1)
+    IEnumerator IzolatePlayer()
+    {
+        while (currentValue >= 0.01) 
         {
-            //≥зол€ц≥€ гравц€
-            print("izolation");
+            yield return new WaitForSeconds(Time.deltaTime);
         }
+        player.ResetMoving();
     }
 
     public void SetValue(float value)
     {
         currentValue = value;
+
+        if (currentValue >= 0.98)
+        {
+            player.StopMoving();
+            StartCoroutine(IzolatePlayer());
+            print("izolation");
+        }
     }
 
     public float GetValue()
