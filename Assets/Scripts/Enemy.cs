@@ -22,9 +22,12 @@ public class Enemy : MonoBehaviour
     Coroutine spawnCoroutine;
     Coroutine stopingCoroutine;
     float _time_;
+    public float minSpeed;
+    public float maxSpeed;
 
     private void Start()
     {
+        speed = Random.Range(minSpeed, maxSpeed);
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
