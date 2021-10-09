@@ -9,6 +9,8 @@ public class NuclearCloud : MonoBehaviour
     public float speed = 10f;
     public Vector2 dir;
 
+    public float delay = .3f;
+
     private void Start()
     {
         radius = transform.localScale.x;
@@ -28,7 +30,27 @@ public class NuclearCloud : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-            collision.GetComponent<Character>().UpdateSick(damage);
+        {
+            UpdatePlayerSick(collision.transform.parent.gameObject);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            delay -= Time.deltaTime;
+            if(delay <= 0f)
+            {
+                delay = .1f;
+                UpdatePlayerSick(collision.transform.parent.gameObject);
+            }
+        }
+    }
+
+    private void UpdatePlayerSick(GameObject player)
+    {
+        player.GetComponent<Character>().UpdateSick(damage);
     }
 
     public void SetDirection(Vector2 dir)

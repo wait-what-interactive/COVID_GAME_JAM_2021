@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public int damage = 1;
     public float speed = 10f;
+    public GameObject destroyPS;
 
     void Update()
     {
@@ -20,6 +21,10 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("LevelBorder"))
+        {
+            if (destroyPS)
+                Instantiate(destroyPS, transform.position, Quaternion.identity);
             Destroy(gameObject);
+        }
     }
 }
