@@ -43,14 +43,15 @@ public class NuclearCloud : MonoBehaviour
             if(delay <= 0f)
             {
                 delay = .1f;
-                UpdatePlayerSick(collision.transform.parent.gameObject);
+                UpdatePlayerSick(collision?.transform?.parent?.gameObject);
             }
         }
     }
 
     private void UpdatePlayerSick(GameObject player)
     {
-        player.GetComponent<Character>().UpdateSick(damage);
+        if(player)
+            player?.GetComponent<Character>()?.UpdateSick(damage);
     }
 
     public void SetDirection(Vector2 dir)

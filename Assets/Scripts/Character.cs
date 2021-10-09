@@ -75,13 +75,13 @@ public class Character : MonoBehaviour
 
         transform.position = Vector2.MoveTowards(transform.position, pointToAnotherFloor.position, speed * 2 * Time.deltaTime);
 
-        if(Vector2.Distance(transform.position, pointToAnotherFloor.position) <= 0.1f)
+        if(Mathf.Abs(Vector2.Distance(transform.position, pointToAnotherFloor.position)) <= 0.25f)
         {
+            _rigidBody.velocity = Vector2.zero;
+            _collider.isTrigger = false;
+            _rigidBody.bodyType = RigidbodyType2D.Dynamic;
             _stairsMovement = false;
             pointToAnotherFloor = null;
-            _rigidBody.bodyType = RigidbodyType2D.Dynamic;
-            _collider.isTrigger = false;
-            _rigidBody.velocity = Vector2.zero;
         }
     }
 
@@ -112,9 +112,11 @@ public class Character : MonoBehaviour
 
                 if (!pointToAnotherFloor) return;
 
+                _rigidBody.velocity = Vector2.zero;
                 _stairsMovement = true;
                 _rigidBody.bodyType = RigidbodyType2D.Kinematic;
                 _collider.isTrigger = true;
+
             }
         }
     }
