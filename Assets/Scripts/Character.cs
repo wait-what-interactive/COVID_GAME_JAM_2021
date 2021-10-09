@@ -11,16 +11,18 @@ public class Character : MonoBehaviour
 
     private Rigidbody2D _rigidBody;
     private Collider2D _collider;
+    private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private bool _stairsMovement = false;
-    Transform pointToAnotherFloor;
-
+    private bool _jumping = false;
+    Transform pointToAnotherFloor; 
     bool canMove = true;
 
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
+        _animator = GetComponentInChildren<Animator>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -32,10 +34,18 @@ public class Character : MonoBehaviour
         if (_stairsMovement)
             MoveToAnotherFloor();
 
-        if(Input.GetKey(KeyCode.Space) && IsGrounded())
+
+        if (IsGrounded() && _jumping)
+        {
+            _jumping = false;
+            EndJump();
+        }
+
+        if (Input.GetKey(KeyCode.Space) && IsGrounded() && !_jumping)
         {
             Jump();
         }
+
     }
 
     private void FixedUpdate()
@@ -65,13 +75,19 @@ public class Character : MonoBehaviour
 
     private void Move()
     {
+        if(Input.GetAxis("Horizontal") == 0)
+        {
+            _animator.SetBool("Run", false);
+            return;
+        }
+        _animator.SetBool("Run", true);
         transform.Translate(transform.right * Input.GetAxis("Horizontal") * speed * Time.deltaTime);
 
         if (Input.GetAxis("Horizontal") > 0)
-            _spriteRenderer.flipX = false;
+            Flip(false);
 
         else if (Input.GetAxis("Horizontal") < 0)
-            _spriteRenderer.flipX = true;
+            Flip(true);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -93,8 +109,10 @@ public class Character : MonoBehaviour
 
     private void Jump()
     {
+        _animator.SetBool("Jump", true);
         _rigidBody.velocity = Vector2.zero;
         _rigidBody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        _jumping = true;
     }
 
     private bool IsGrounded()
@@ -107,6 +125,26 @@ public class Character : MonoBehaviour
         sickIndicator.SetValue(sickIndicator.GetValue() + value);
     }
 
+    public void PlayShootAnimation()
+    {
+        _animator.SetBool("Shoot", true);
+    }
+
+    public void PlayIsolationAnimation()
+    {
+        _animator.SetTrigger("Isolate");
+    }
+
+    public void EndShoot()
+    {
+        _animator.SetBool("Shoot", false);
+    }
+
+    public void EndJump()
+    {
+        _animator.SetBool("Jump", false);
+    }
+    
     public void StopMoving()
     {
         print("here");
@@ -116,5 +154,10 @@ public class Character : MonoBehaviour
     public void ResetMoving()
     {
         canMove = true;
+    }
+
+    public void Flip(bool flip)
+    {
+        _spriteRenderer.flipX = flip;
     }
 }

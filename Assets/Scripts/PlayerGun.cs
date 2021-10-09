@@ -11,9 +11,11 @@ public class PlayerGun : MonoBehaviour
     private Transform _bulletSpawnPoint;
 
     private float _shootRate = .5f;
+    private Character _character;
 
     void Start()
     {
+        _character = transform.parent.GetComponent<Character>();
         _gun = transform.GetChild(0).gameObject;
         _bulletSpawnPoint = _gun.transform.GetChild(0);
         _shootRate = shootRate;
@@ -39,6 +41,13 @@ public class PlayerGun : MonoBehaviour
 
     private void Shoot()
     {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (mousePosition.x > transform.position.x)
+            _character.Flip(false);
+        else
+            _character.Flip(true);
+
+        _character.PlayShootAnimation();
         Vector3 rot = transform.rotation.eulerAngles;
         Instantiate(bullet, _bulletSpawnPoint.position, Quaternion.Euler(rot));
     }
