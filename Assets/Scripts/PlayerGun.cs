@@ -7,7 +7,6 @@ public class PlayerGun : MonoBehaviour
     public GameObject bullet;
     public float shootRate = .5f;
 
-    private GameObject _gun;
     private Transform _bulletSpawnPoint;
 
     private float _shootRate = .5f;
@@ -16,8 +15,7 @@ public class PlayerGun : MonoBehaviour
     void Start()
     {
         _character = transform.parent.GetComponent<Character>();
-        _gun = transform.GetChild(0).gameObject;
-        _bulletSpawnPoint = _gun.transform.GetChild(0);
+        _bulletSpawnPoint = transform.GetChild(0);
         _shootRate = shootRate;
     }
 
@@ -43,7 +41,8 @@ public class PlayerGun : MonoBehaviour
     {
         _character.PlayShootAnimation();
         Vector3 rot = transform.rotation.eulerAngles;
-        Instantiate(bullet, _bulletSpawnPoint.position, Quaternion.Euler(rot));
+        GameObject _bullet = Instantiate(bullet, _bulletSpawnPoint.position, Quaternion.Euler(rot));
+        _bullet.GetComponent<Rigidbody2D>().AddForce(transform.up * 15f, ForceMode2D.Impulse);
     }
 
     private void RotateGunToMouse()
