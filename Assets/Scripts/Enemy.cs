@@ -70,18 +70,21 @@ public class Enemy : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Bullet"))
         {
-            HP -= collision.gameObject.GetComponent<Bullet>().GetDamage();
-            if (HP <= 0)
+            if(Random.Range(0,4) == 1)
             {
-                _animator.SetBool("Isolated", true);
-                haveMask = true;
-                EnemyController.RemoveEnemy(gameObject);
-                transform.GetChild(0).gameObject.SetActive(false);
-                StopCoroutine(spawnCoroutine);
-                GetComponent<Collider2D>().isTrigger = true;
-            }
+                HP -= collision.gameObject.GetComponent<Bullet>().GetDamage();
+                if (HP <= 0)
+                {
+                    _animator.SetBool("Isolated", true);
+                    haveMask = true;
+                    EnemyController.RemoveEnemy(gameObject);
+                    transform.GetChild(0).gameObject.SetActive(false);
+                    StopCoroutine(spawnCoroutine);
+                    GetComponent<Collider2D>().isTrigger = true;
+                }
 
-            return;
+                return;
+            }
         }
 
         if(collision.gameObject.CompareTag("LevelBorder"))
