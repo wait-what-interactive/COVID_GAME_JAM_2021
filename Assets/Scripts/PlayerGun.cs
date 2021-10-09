@@ -22,6 +22,9 @@ public class PlayerGun : MonoBehaviour
 
     void Update()
     {
+        if (_character.isolated)
+            return;
+
         RotateGunToMouse();
 
         if(shootRate > 0f)

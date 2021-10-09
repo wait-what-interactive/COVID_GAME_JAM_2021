@@ -8,4 +8,34 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Preloader.unity
     guid: 79c58496b8c18044891cffdb5a56dbfb
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level1.unity
+    guid: e84ab32b0c952ca40a0191437423c542
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level2.unity
+    guid: d15e7fdca340fcb4ca8d311998ef67c2
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level3.unity
+    guid: 2f4c01f1208d7a14799fd6c6e62b6fb4
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level4.unity
+    guid: 3b211f9a84e3748438aa39aa8a72ec0b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level5.unity
+    guid: 5178c219d1ba4164baadf2eaf3047627
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level6.unity
+    guid: c16d3c2bc6ebed840b41e44191cd3a73
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level7.unity
+    guid: 1a3191dd8ac6bb74cb97786b8ae6788b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level8.unity
+    guid: 6ac720afa5aef2645b0cc056bb756b7d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level9.unity
+    guid: eef97691476e04c46be381ca6bf4a08f
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level10.unity
+    guid: 59d30a20f821b064494a229e26f00eda
   m_configObjects: {}
