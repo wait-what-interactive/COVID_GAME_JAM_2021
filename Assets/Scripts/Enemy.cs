@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
 
     Coroutine spawnCoroutine;
     Coroutine stopingCoroutine;
+    float _time_;
 
     private void Start()
     {
@@ -62,11 +63,11 @@ public class Enemy : MonoBehaviour
         _animator.SetBool("Run", true);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.CompareTag("Bullet"))
+        if(collision.gameObject.CompareTag("Bullet"))
         {
-            HP -= collision.GetComponent<Bullet>().GetDamage();
+            HP -= collision.gameObject.GetComponent<Bullet>().GetDamage();
             if (HP <= 0)
             {
                 _animator.SetBool("Isolated", true);
@@ -74,12 +75,13 @@ public class Enemy : MonoBehaviour
                 EnemyController.RemoveEnemy(gameObject);
                 transform.GetChild(0).gameObject.SetActive(false);
                 StopCoroutine(spawnCoroutine);
+                GetComponent<Collider2D>().isTrigger = true;
             }
 
             return;
         }
 
-        if(collision.CompareTag("LevelBorder"))
+        if(collision.gameObject.CompareTag("LevelBorder"))
         {
             dir = dir == Vector2.left ? Vector2.right : Vector2.left;
             return;
@@ -104,16 +106,18 @@ public class Enemy : MonoBehaviour
         //spawn cloud
 
         _animator.SetBool("Attack", true);
-
-        float time_ = Random.Range(minTimeToSpawnCloud, maxTimeToSpawnCloud);
-        spawnCoroutine = StartCoroutine(SpawnCloud(time_));
-        stopingCoroutine = StartCoroutine(StopEnemy(time - 2));
+        _animator.SetBool("Run", false);
+        _time_ = time;
     }
 
     public void SpawnCloudFunction()
     {
         var cloud = Instantiate(nuclearCloud, transform.position, Quaternion.identity);
         cloud.GetComponent<NuclearCloud>().SetDirection(dir);
+
+        float time_ = Random.Range(minTimeToSpawnCloud, maxTimeToSpawnCloud);
+        spawnCoroutine = StartCoroutine(SpawnCloud(time_));
+        stopingCoroutine = StartCoroutine(StopEnemy(_time_ - 2));
     }
 
     IEnumerator StopEnemy(float time)
