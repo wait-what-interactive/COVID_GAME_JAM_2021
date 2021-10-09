@@ -51,7 +51,7 @@ public class EnemyController : MonoBehaviour
     {
         spawnedEnemies.RemoveAt(0);
 
-        if(spawnedEnemies.Count==0)
+        if(spawnedEnemies.Count == 0)
         {
             print("got to next level");
             //go to next level
