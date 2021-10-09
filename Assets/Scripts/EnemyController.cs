@@ -34,10 +34,10 @@ public class EnemyController : MonoBehaviour
             {
                 float xPos;
 
-                do
-                {
+                //do
+                //{
                     xPos = Random.Range(leftWall.transform.position.x + 1, rightWall.transform.position.x - 1);
-                } while (!(player.transform.position.x < xPos + 3 && (player.transform.position.x > xPos - 3)));
+                //} while (!(player.transform.position.x < xPos + 3 && (player.transform.position.x > xPos - 3)));
 
                 enemyPos = new Vector2(xPos, firstLevelSpawn);
             }

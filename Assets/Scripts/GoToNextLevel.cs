@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GoToNextLevel : MonoBehaviour
 {
-    static int currentLevel = 1;
+    public static int currentLevel = 1;
 
     private void Awake()
     {
