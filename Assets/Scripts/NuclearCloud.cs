@@ -43,7 +43,7 @@ public class NuclearCloud : MonoBehaviour
             if(delay <= 0f)
             {
                 delay = .1f;
-                UpdatePlayerSick(collision.transform.parent.gameObject);
+                UpdatePlayerSick(collision?.transform?.parent?.gameObject);
             }
         }
     }

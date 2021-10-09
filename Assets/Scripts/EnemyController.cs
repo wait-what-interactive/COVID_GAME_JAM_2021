@@ -28,8 +28,8 @@ public class EnemyController : MonoBehaviour
         {
             Vector3 enemyPos=Vector3.zero;
 
-            if(Random.Range(0,2) == 1)
-                enemyPos = new Vector2(Random.Range(leftWall.transform.position.x + 1, rightWall.transform.position.x - 1 ), secondLevelSpawn);
+            if(Random.Range(0,2) == 0)
+                enemyPos = new Vector2(Random.Range(leftWall.transform.position.x + 2, rightWall.transform.position.x - 2 ), secondLevelSpawn);
             else
             {
                 float xPos;
