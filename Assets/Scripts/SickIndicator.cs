@@ -44,14 +44,28 @@ public class SickIndicator : MonoBehaviour
 
         if (currentValue >= 0.98)
         {
-            player.StopMoving();
-            //StartCoroutine(IzolatePlayer());
-            print("izolation");
+            //player.StopMoving();
+            ////StartCoroutine(IzolatePlayer());
+            //print("izolation");
 
-            SceneManager.LoadScene("Isolator");
+            //SceneManager.LoadScene("Isolator");
 
-            //player.PlayIsolationAnimation();
+            ////player.PlayIsolationAnimation();
+            StartCoroutine(GoToIsolator());
         }
+    }
+
+    private IEnumerator GoToIsolator()
+    {
+        player.StopMoving();
+
+        player.PlayIsolationAnimation();
+        yield return new WaitForSeconds(1f);
+
+        Camera.main.GetComponent<Animator>().SetTrigger("FadeIn");
+        yield return new WaitForSeconds(1.1f);
+
+        SceneManager.LoadScene("Isolator");
     }
 
     public float GetValue()
