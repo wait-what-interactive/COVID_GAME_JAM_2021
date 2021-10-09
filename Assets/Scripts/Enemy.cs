@@ -47,6 +47,7 @@ public class Enemy : MonoBehaviour
             if (HP <= 0)
             {
                 haveMask = true;
+                EnemyController.RemoveEnemy(gameObject);
                 transform.GetChild(0).gameObject.SetActive(false);
                 StopCoroutine(spawnCoroutine);
             }
