@@ -2,30 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SickIndicator : MonoBehaviour
 {
-    float currentValue = 0.5f;
+    float currentValue = 0f;
 
     public float speed;
 
-    Slider leftIndicator;
-    Slider rightIndicator;
+    Image leftIndicator;
+    Image rightIndicator;
 
     public Character player;
 
     private void Start()
     {
-        leftIndicator = transform.GetChild(0).GetComponent<Slider>();
-        rightIndicator = transform.GetChild(1).GetComponent<Slider>();
+        leftIndicator = transform.GetChild(0).transform.GetChild(0).GetComponent<Image>();
+        rightIndicator = transform.GetChild(1).transform.GetChild(0).GetComponent<Image>();
     }
 
     void Update()
     {
-        currentValue = currentValue > 0 ? currentValue - Time.deltaTime*speed : 0;
+        currentValue = currentValue > 0 ? currentValue - Time.deltaTime*speed/3 : 0;
 
-        leftIndicator.value = currentValue;
-        rightIndicator.value = currentValue;
+        leftIndicator.fillAmount = currentValue;
+        rightIndicator.fillAmount = currentValue;
     }
 
     IEnumerator IzolatePlayer()
@@ -43,11 +44,28 @@ public class SickIndicator : MonoBehaviour
 
         if (currentValue >= 0.98)
         {
-            player.StopMoving();
-            StartCoroutine(IzolatePlayer());
-            print("izolation");
-            player.PlayIsolationAnimation();
+            //player.StopMoving();
+            ////StartCoroutine(IzolatePlayer());
+            //print("izolation");
+
+            //SceneManager.LoadScene("Isolator");
+
+            ////player.PlayIsolationAnimation();
+            StartCoroutine(GoToIsolator());
         }
+    }
+
+    private IEnumerator GoToIsolator()
+    {
+        player.StopMoving();
+
+        player.PlayIsolationAnimation();
+        yield return new WaitForSeconds(1f);
+
+        Camera.main.GetComponent<Animator>().SetTrigger("FadeIn");
+        yield return new WaitForSeconds(1.1f);
+
+        SceneManager.LoadScene("Isolator");
     }
 
     public float GetValue()
