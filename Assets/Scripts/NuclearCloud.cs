@@ -8,6 +8,7 @@ public class NuclearCloud : MonoBehaviour
     public float damage = 0.1f;
     public float speed = 10f;
     public Vector2 dir;
+    public ParticleSystem ps;
 
     private void Start()
     {
@@ -18,7 +19,10 @@ public class NuclearCloud : MonoBehaviour
     {
         transform.Translate(dir * speed * Time.deltaTime);
 
-        radius -= Time.deltaTime*speed;
+        radius -= Time.deltaTime * speed;
+
+        ParticleSystem.ShapeModule sh = ps.shape;
+        sh.radius -= Time.deltaTime * speed / 4f;
         transform.localScale = Vector3.one * radius;
 
         if (radius <= 0.1)
