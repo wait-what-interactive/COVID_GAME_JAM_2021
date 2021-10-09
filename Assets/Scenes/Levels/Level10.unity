@@ -151,6 +151,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 362974776773186594, guid: 7d8d3adabf72df0459debbc26ce66039, type: 3}
+      propertyPath: count
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 3125073330153996452, guid: 7d8d3adabf72df0459debbc26ce66039, type: 3}
       propertyPath: m_Name
       value: Level
