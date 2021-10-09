@@ -41,12 +41,6 @@ public class PlayerGun : MonoBehaviour
 
     private void Shoot()
     {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (mousePosition.x > transform.position.x)
-            _character.Flip(false);
-        else
-            _character.Flip(true);
-
         _character.PlayShootAnimation();
         Vector3 rot = transform.rotation.eulerAngles;
         Instantiate(bullet, _bulletSpawnPoint.position, Quaternion.Euler(rot));
@@ -59,5 +53,11 @@ public class PlayerGun : MonoBehaviour
 
         float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, rotZ + 270);
+
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (mousePosition.x > transform.position.x)
+            _character.Flip(false);
+        else
+            _character.Flip(true);
     }
 }
