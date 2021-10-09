@@ -32,7 +32,10 @@ public class Character : MonoBehaviour
             return;
 
         if (_stairsMovement)
+        {
             MoveToAnotherFloor();
+            return;
+        }
 
 
         if (IsGrounded() && _jumping)
@@ -62,7 +65,7 @@ public class Character : MonoBehaviour
         if (!pointToAnotherFloor)
             return;
 
-        transform.position = Vector2.MoveTowards(transform.position, pointToAnotherFloor.position, speed * 3 * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, pointToAnotherFloor.position, speed * 2 * Time.deltaTime);
 
         if(Vector2.Distance(transform.position, pointToAnotherFloor.position) < 0.1f)
         {
@@ -70,6 +73,7 @@ public class Character : MonoBehaviour
             pointToAnotherFloor = null;
             _rigidBody.bodyType = RigidbodyType2D.Dynamic;
             _collider.isTrigger = false;
+            _rigidBody.velocity = Vector2.zero;
         }
     }
 

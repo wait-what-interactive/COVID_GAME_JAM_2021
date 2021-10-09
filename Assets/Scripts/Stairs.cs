@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Stairs : MonoBehaviour
 {
-    public Transform pointMoveToBottom;
-    public Transform pointMoveToTop;
+    public Transform pointMoveToBottom = null;
+    public Transform pointMoveToTop = null;
 
     public Transform GetPointMoveTo(float v_axis)
     {

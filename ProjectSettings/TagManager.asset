@@ -7,16 +7,17 @@ TagManager:
   - Stairs
   - LevelBorder
   - Bullet
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 
   - Ground
-  - 
+  - Bullet
   - 
   - 
   - 
