@@ -46,6 +46,7 @@ public class SickIndicator : MonoBehaviour
             player.StopMoving();
             StartCoroutine(IzolatePlayer());
             print("izolation");
+            player.PlayIsolationAnimation();
         }
     }
 
