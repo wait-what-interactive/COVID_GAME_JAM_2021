@@ -13,7 +13,9 @@ public class Character : MonoBehaviour
     private Collider2D _collider;
     private SpriteRenderer _spriteRenderer;
     private bool _stairsMovement = false;
-    Transform pointToAnotherFloor; 
+    Transform pointToAnotherFloor;
+
+    bool canMove = true;
 
     void Start()
     {
@@ -24,6 +26,9 @@ public class Character : MonoBehaviour
 
     void Update()
     {
+        if (!canMove)
+            return;
+
         if (_stairsMovement)
             MoveToAnotherFloor();
 
@@ -35,6 +40,9 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!canMove)
+            return;
+
         if (!_stairsMovement)
             Move();
     }
@@ -97,5 +105,16 @@ public class Character : MonoBehaviour
     public void UpdateSick(float value)
     {
         sickIndicator.SetValue(sickIndicator.GetValue() + value);
+    }
+
+    public void StopMoving()
+    {
+        print("here");
+        canMove = false;
+    }
+
+    public void ResetMoving()
+    {
+        canMove = true;
     }
 }

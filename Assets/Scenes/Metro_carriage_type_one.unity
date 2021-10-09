@@ -3067,6 +3067,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &572687974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1996625730637847891, guid: 6c58306229c62254cb076b1cd0e0c541, type: 3}
+  m_PrefabInstance: {fileID: 1996625732463707232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caee003a0c34ff7408b62055c849366d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &922321937
 GameObject:
   m_ObjectHideFlags: 0
@@ -8212,6 +8223,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SickIndicator
       objectReference: {fileID: 0}
+    - target: {fileID: 7026560782685040251, guid: 811546cd282cd4b42aeabc2de70534ad, type: 3}
+      propertyPath: speed
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026560782685040251, guid: 811546cd282cd4b42aeabc2de70534ad, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 572687974}
     - target: {fileID: 7026560782971677775, guid: 811546cd282cd4b42aeabc2de70534ad, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
