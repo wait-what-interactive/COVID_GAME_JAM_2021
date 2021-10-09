@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     float _time_;
     public float minSpeed;
     public float maxSpeed;
+    public GameObject sound;
 
     private void Start()
     {
@@ -75,6 +76,7 @@ public class Enemy : MonoBehaviour
                 HP -= collision.gameObject.GetComponent<Bullet>().GetDamage();
                 if (HP <= 0)
                 {
+                    Destroy(Instantiate(sound), 2);
                     _animator.SetBool("Isolated", true);
                     haveMask = true;
                     EnemyController.RemoveEnemy(gameObject);

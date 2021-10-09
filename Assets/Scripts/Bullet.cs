@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public float speed = 10f;
     public GameObject destroyPS;
     public GameObject hitEnemyPS;
+    public GameObject sound;
 
     void Update()
     {
@@ -31,7 +32,11 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             if (hitEnemyPS)
+            {
                 Instantiate(hitEnemyPS, transform.position, Quaternion.identity);
+
+            }
+
             Destroy(gameObject);
             return;
         }

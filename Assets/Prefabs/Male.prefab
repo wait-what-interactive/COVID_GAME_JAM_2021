@@ -283,6 +283,7 @@ MonoBehaviour:
   nuclearCloud: {fileID: 3995497119341837523, guid: 259a8c8bc4893bd48a32b267f0f31f80, type: 3}
   minSpeed: 1
   maxSpeed: 5
+  sound: {fileID: 2343824621662778163, guid: 82efe98f8faaf8c4c9b13013d5e340e5, type: 3}
 --- !u!50 &8822491160555296880
 Rigidbody2D:
   serializedVersion: 4
