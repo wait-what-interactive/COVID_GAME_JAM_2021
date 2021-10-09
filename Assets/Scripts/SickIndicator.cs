@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SickIndicator : MonoBehaviour
 {
-    float currentValue = 0f;
+    float currentValue = 0.5f;
 
     public float speed;
 
@@ -22,7 +22,7 @@ public class SickIndicator : MonoBehaviour
 
     void Update()
     {
-        currentValue = currentValue > 0 ? currentValue - Time.deltaTime*speed/3 : 0;
+        currentValue = currentValue > 0 ? currentValue - Time.deltaTime*speed : 0;
 
         leftIndicator.value = currentValue;
         rightIndicator.value = currentValue;

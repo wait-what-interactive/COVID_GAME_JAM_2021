@@ -50,8 +50,7 @@ public class NuclearCloud : MonoBehaviour
 
     private void UpdatePlayerSick(GameObject player)
     {
-        if(player.GetComponent<Character>())
-             player.GetComponent<Character>().UpdateSick(damage);
+        player.GetComponent<Character>().UpdateSick(damage);
     }
 
     public void SetDirection(Vector2 dir)
