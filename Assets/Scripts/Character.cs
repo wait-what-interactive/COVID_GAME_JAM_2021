@@ -67,7 +67,7 @@ public class Character : MonoBehaviour
 
         transform.position = Vector2.MoveTowards(transform.position, pointToAnotherFloor.position, speed * 2 * Time.deltaTime);
 
-        if(Vector2.Distance(transform.position, pointToAnotherFloor.position) < 0.1f)
+        if(Vector2.Distance(transform.position, pointToAnotherFloor.position) <= 0.1f)
         {
             _stairsMovement = false;
             pointToAnotherFloor = null;
