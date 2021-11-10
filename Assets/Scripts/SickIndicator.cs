@@ -10,20 +10,23 @@ public class SickIndicator : MonoBehaviour
 
     public float speed;
 
-    Image centerIndicator;
+    Image leftIndicator;
+    Image rightIndicator;
 
     public Character player;
 
     private void Start()
     {
-        centerIndicator = transform.GetChild(0).transform.GetChild(0).GetComponent<Image>();
+        leftIndicator = transform.GetChild(0).transform.GetChild(0).GetComponent<Image>();
+        rightIndicator = transform.GetChild(1).transform.GetChild(0).GetComponent<Image>();
     }
 
     void Update()
     {
         currentValue = currentValue > 0 ? currentValue - Time.deltaTime*speed/3 : 0;
 
-        centerIndicator.fillAmount = currentValue;
+        leftIndicator.fillAmount = currentValue;
+        rightIndicator.fillAmount = currentValue;
     }
 
     IEnumerator IzolatePlayer()
@@ -40,7 +43,16 @@ public class SickIndicator : MonoBehaviour
         currentValue = value;
 
         if (currentValue >= 0.98)
+        {
+            //player.StopMoving();
+            ////StartCoroutine(IzolatePlayer());
+            //print("izolation");
+
+            //SceneManager.LoadScene("Isolator");
+
+            ////player.PlayIsolationAnimation();
             StartCoroutine(GoToIsolator());
+        }
     }
 
     private IEnumerator GoToIsolator()
