@@ -10,6 +10,11 @@ public class Bullet : MonoBehaviour
     public GameObject hitEnemyPS;
     public GameObject sound;
 
+    private void Start()
+    {
+        Destroy(Instantiate(sound, transform.parent), 2);
+    }
+
     void Update()
     {
         transform.Translate(Vector2.up * speed * Time.deltaTime);
