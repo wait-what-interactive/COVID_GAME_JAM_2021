@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class PlayerGun : MonoBehaviour
@@ -13,11 +14,16 @@ public class PlayerGun : MonoBehaviour
     private float _shootRate = .5f;
     private Character _character;
 
+    private BulletPool _objectsPool;
+
+
     void Start()
     {
         _character = transform.parent.GetComponent<Character>();
         _bulletSpawnPoint = transform.GetChild(0);
         _shootRate = shootRate;
+
+        _objectsPool = new BulletPool(7, bullet);
     }
 
     void Update()
@@ -48,7 +54,8 @@ public class PlayerGun : MonoBehaviour
 
         _character.PlayShootAnimation();
         Vector3 rot = transform.rotation.eulerAngles;
-        GameObject _bullet = Instantiate(bullet, _bulletSpawnPoint.position, Quaternion.Euler(rot));
+        GameObject _bullet = _objectsPool.GetObject();
+        _bullet.transform.SetPositionAndRotation(_bulletSpawnPoint.position, Quaternion.Euler(rot));
         _bullet.GetComponent<Rigidbody2D>().AddForce(transform.up * 15f, ForceMode2D.Impulse);
     }
 

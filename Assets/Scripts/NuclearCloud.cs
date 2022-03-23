@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class NuclearCloud : MonoBehaviour
@@ -10,6 +11,13 @@ public class NuclearCloud : MonoBehaviour
     public Vector2 dir;
 
     public float delay = .3f;
+
+    private UnityAction<GameObject> _action;
+
+    public void SetAction(UnityAction<GameObject> action)
+    {
+        _action = action;
+    }
 
     private void Start()
     {
@@ -24,7 +32,11 @@ public class NuclearCloud : MonoBehaviour
         transform.localScale = Vector3.one * radius;
 
         if (radius <= 0.1)
-            Destroy(gameObject);
+        {
+            radius = 10;
+            _action.Invoke(gameObject);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

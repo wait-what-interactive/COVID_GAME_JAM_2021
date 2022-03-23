@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
     public float maxSpeed;
     public GameObject sound;
 
+    private CloudPool _cloudPool;
+
     private void Start()
     {
         speed = Random.Range(minSpeed, maxSpeed);
@@ -40,6 +42,8 @@ public class Enemy : MonoBehaviour
         float time = Random.Range(minTimeToSpawnCloud, maxTimeToSpawnCloud);
         spawnCoroutine = StartCoroutine(SpawnCloud(time));
         stopingCoroutine = StartCoroutine(StopEnemy(time - 2));
+
+        _cloudPool = new CloudPool(1, nuclearCloud);
     }
 
     void Update()
@@ -124,7 +128,8 @@ public class Enemy : MonoBehaviour
 
     public void SpawnCloudFunction()
     {
-        var cloud = Instantiate(nuclearCloud, transform.position, Quaternion.identity);
+        var cloud = _cloudPool.GetObject();
+        cloud.transform.SetPositionAndRotation(transform.position, Quaternion.identity);//Instantiate(nuclearCloud, transform.position, Quaternion.identity);
         cloud.GetComponent<NuclearCloud>().SetDirection(dir);
 
         float time_ = Random.Range(minTimeToSpawnCloud, maxTimeToSpawnCloud);

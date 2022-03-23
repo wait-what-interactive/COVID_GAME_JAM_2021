@@ -47,6 +47,8 @@ MonoBehaviour:
   bullet: {fileID: 5931625453233561866, guid: e787dfb8a9bfdd441812e8798f03af17, type: 3}
   shootRate: 0.4
   shootParticles: {fileID: 312693724}
+  _parentNode: {fileID: 1996625730637847889}
+  _startSize: 5
 --- !u!1 &312693721
 GameObject:
   m_ObjectHideFlags: 0
@@ -5041,6 +5043,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
+  isolated: 0
 --- !u!1 &1996625731711200774
 GameObject:
   m_ObjectHideFlags: 0

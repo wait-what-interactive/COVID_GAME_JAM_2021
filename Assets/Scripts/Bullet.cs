@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Bullet : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class Bullet : MonoBehaviour
     public GameObject hitEnemyPS;
     public GameObject sound;
 
+    private UnityAction<GameObject> _action;
+
+    public void SetAction(UnityAction<GameObject> action)
+    {
+        _action = action;
+    }
     void Update()
     {
         transform.Translate(Vector2.up * speed * Time.deltaTime);
@@ -26,7 +33,7 @@ public class Bullet : MonoBehaviour
         {
             if (destroyPS)
                 Instantiate(destroyPS, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            _action.Invoke(gameObject);
             return;
         }
         if (collision.gameObject.CompareTag("Enemy"))
@@ -37,7 +44,7 @@ public class Bullet : MonoBehaviour
 
             }
 
-            Destroy(gameObject);
+            _action.Invoke(gameObject);
             return;
         }
     }
